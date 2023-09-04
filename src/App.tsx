@@ -99,7 +99,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (isMobile) {
+    if (isMobile && anchorEl) {
+      setActiveMobileNav(true);
       setAnchorEl(null);
     }
   }, [isMobile]);

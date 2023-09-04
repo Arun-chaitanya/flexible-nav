@@ -18,7 +18,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
     <BasePopover
       classes={{
         paper: clsx(
-          "popoverRoot",
+          styles.popoverRoot,
           width && styles[`popoverWidth${width}`],
           className
         ),
