@@ -33,11 +33,11 @@ const Popover: React.FC<PopoverProps> = (props) => {
       }}
       anchorOrigin={{
         vertical: "bottom",
-        horizontal: "right",
+        horizontal: "left",
       }}
       transformOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: "left",
       }}
       {...rest}
     >

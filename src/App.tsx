@@ -33,6 +33,7 @@ function App() {
   const [hiddenItems, setHiddenItems] = useState<string[]>([]);
   const [activeNav, setActiveNav] = useState<string>();
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+  const [moreEl, setMoreEl] = useState<Element | null>(null);
   const [activeMobileNav, setActiveMobileNav] = useState<boolean>(false);
   const anchorId = anchorEl ? "sort-by-popover" : undefined;
 
@@ -44,8 +45,7 @@ function App() {
 
       if (!navList) return;
 
-      const availableWidth =
-        Math.floor(navList.clientWidth) - getTextWidth("More &#9660;"); // Use clientWidth instead of offsetWidth
+      const availableWidth = navList.clientWidth - getTextWidth("More &#9660;"); // Use clientWidth instead of offsetWidth
 
       let totalWidth = 0;
       const newVisibleItems: string[] = [];
@@ -102,6 +102,11 @@ function App() {
     if (isMobile && anchorEl) {
       setActiveMobileNav(true);
       setAnchorEl(null);
+      setMoreEl(anchorEl);
+    }
+    if (!isMobile && activeMobileNav) {
+      setActiveMobileNav(false);
+      setAnchorEl(moreEl);
     }
   }, [isMobile]);
 
