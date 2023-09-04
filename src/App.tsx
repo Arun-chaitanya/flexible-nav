@@ -36,7 +36,7 @@ function App() {
   const [activeMobileNav, setActiveMobileNav] = useState<boolean>(false);
   const anchorId = anchorEl ? "sort-by-popover" : undefined;
 
-  const isMobile = useBreakpoint({ max: "sm" });
+  const isMobile = useBreakpoint({ max: "xs" });
 
   useEffect(() => {
     const calculateVisibleItems = () => {
