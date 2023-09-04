@@ -3,6 +3,7 @@ import "./App.css";
 import SwiperView from "./SwiperView";
 import Popover from "./Popover";
 import clsx from "clsx";
+import useBreakpoint from "./useBreakpoint";
 
 function App() {
   const navItems = [
@@ -35,20 +36,16 @@ function App() {
   const [activeMobileNav, setActiveMobileNav] = useState<boolean>(false);
   const anchorId = anchorEl ? "sort-by-popover" : undefined;
 
-  console.log(visibleItems, hiddenItems, "ARUN");
+  const isMobile = useBreakpoint({ max: "sm" });
 
   useEffect(() => {
-    console.log("hi");
     const calculateVisibleItems = () => {
-      console.log("hi 2");
       const navList = document.querySelector<HTMLElement>(".topnav");
-      const moreBtn = document.querySelector<HTMLElement>(".more");
 
-      if (!navList || !moreBtn) return;
+      if (!navList) return;
 
       const availableWidth =
-        Math.floor(navList.clientWidth) - moreBtn.clientWidth; // Use clientWidth instead of offsetWidth
-      console.log(availableWidth, "ARUN");
+        Math.floor(navList.clientWidth) - getTextWidth("More &#9660;"); // Use clientWidth instead of offsetWidth
 
       let totalWidth = 0;
       const newVisibleItems: string[] = [];
@@ -58,7 +55,7 @@ function App() {
       while (navItemsCopy.length > 0) {
         nextItem = navItemsCopy.shift();
         if (!nextItem) break;
-        const itemWidth = getTextWidth(nextItem) + 2 * 16;
+        const itemWidth = getTextWidth(nextItem);
 
         if (totalWidth + itemWidth <= availableWidth) {
           newVisibleItems.push(nextItem);
@@ -89,7 +86,7 @@ function App() {
 
       document.body.removeChild(hiddenElement);
 
-      return width;
+      return width + 2 * 16;
     };
 
     window.addEventListener("load", calculateVisibleItems);
@@ -100,6 +97,12 @@ function App() {
       window.removeEventListener("resize", calculateVisibleItems);
     };
   }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      setAnchorEl(null);
+    }
+  }, [isMobile]);
 
   const renderNavItems = (items: string[]) => {
     return items.map((item, index) => (
@@ -149,14 +152,16 @@ function App() {
           <div className="topnav">
             <ul className="navbar">
               {renderNavItems(visibleItems)}
-              <li className="more">
-                <a
-                  onClick={(e) => setAnchorEl(e.currentTarget)}
-                  className="moreText"
-                >
-                  More &#9660;
-                </a>
-              </li>
+              {!!hiddenItems.length && (
+                <li className="more">
+                  <a
+                    onClick={(e) => setAnchorEl(e.currentTarget)}
+                    className="moreText"
+                  >
+                    More &#9660;
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
           <input
