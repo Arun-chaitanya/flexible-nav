@@ -1,0 +1,74 @@
+/* CoverflowCarousel.css */
+.coverflow-carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-container {
+  display: flex;
+  transition: transform 0.3s ease-in-out; /* Add smooth transition */
+}
+
+.carousel-item {
+  border-radius: 25px;
+  overflow: hidden;
+  flex: 0 0 auto;
+  width: 40vw; /* Adjust the width as needed */
+  height: 50vh; /* Adjust the height as needed */
+  transition: all 0.3s ease-in-out; /* Apply transition to all properties */
+  cursor: pointer;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Remove the pointer-events property for inactive items */
+.carousel-item:not(.active) {
+  position: absolute;
+  transform: scale(0.9) translate(-50%, -50%);
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Increase the z-index for the active item */
+.carousel-item.active {
+  z-index: 2;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.prev-button,
+.next-button {
+  outline: 0;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.pagination-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  background-color: #D3D2D2;
+  cursor: pointer;
+}
+
+.dot.active {
+  width: 32px;
+  background-color: #60BCEA; /* Change the active dot color as desired */
+}

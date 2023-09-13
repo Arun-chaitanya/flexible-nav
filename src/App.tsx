@@ -1,32 +1,24 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import SwiperView from "./SwiperView";
+import SwiperView from "./CoverflowCarousel";
 import Popover from "./Popover";
 import clsx from "clsx";
 import useBreakpoint from "./useBreakpoint";
 
 function App() {
   const navItems = [
-    "Home",
-    "About Us",
-    "Services",
-    "Portfolio",
-    "Blog",
-    "Contact",
-    "Products",
-    "Pricing",
-    "FAQ",
-    "Testimonials",
-    "Team",
-    "Careers",
-    "Events",
-    "News",
-    "Gallery",
-    "Support",
-    "Downloads",
-    "Our Story",
-    "Shop",
-    "Partners",
+    "HOME",
+    "ELECTRONICS",
+    "BOOKS",
+    "MUSIC",
+    "MOVIES",
+    "CLOTHING",
+    "GAMES",
+    "FURNITURE",
+    "ELECTRONIC ",
+    "TRAVEL",
+    "BOTANICAL",
+    "CATEGORY NAME",
   ];
 
   const [visibleItems, setVisibleItems] = useState<string[]>([]);
@@ -55,7 +47,7 @@ function App() {
       while (navItemsCopy.length > 0) {
         nextItem = navItemsCopy.shift();
         if (!nextItem) break;
-        const itemWidth = getTextWidth(nextItem);
+        const itemWidth = getTextWidth(nextItem) + 44;
 
         if (totalWidth + itemWidth <= availableWidth) {
           newVisibleItems.push(nextItem);
@@ -78,6 +70,7 @@ function App() {
         display: inline; /* Ensure it's an inline element for accurate width calculation */
         position: absolute; /* Remove from the layout flow */
         visibility: hidden; /* Hide it from view */
+        
       `;
       hiddenElement.textContent = text;
       document.body.appendChild(hiddenElement);
@@ -86,7 +79,7 @@ function App() {
 
       document.body.removeChild(hiddenElement);
 
-      return width + 2 * 16;
+      return width;
     };
 
     window.addEventListener("load", calculateVisibleItems);
@@ -153,7 +146,7 @@ function App() {
   return (
     <div className="App">
       <div className="topnavContainer">
-        <img src="/yt-white.png" alt="Youtube Logo" className="navLogo" />
+        <img src="/Logo.png" alt="Youtube Logo" className="navLogo" />
         <div className="flex1 desktop">
           <div className="topnav">
             <ul className="navbar">
@@ -164,17 +157,19 @@ function App() {
                     onClick={(e) => setAnchorEl(e.currentTarget)}
                     className="moreText"
                   >
-                    More &#9660;
+                    MORE &#9660;
                   </a>
                 </li>
               )}
             </ul>
           </div>
-          <input
-            type="text"
-            className="textInput"
-            placeholder="Search here..."
-          />
+          <div className="inputContainer">
+            <input
+              type="text"
+              className="textInput"
+              placeholder="Search Something..."
+            />
+          </div>
         </div>
         <button className="menuBtn" onClick={() => setActiveMobileNav(true)}>
           Menu
@@ -189,7 +184,14 @@ function App() {
             Close
           </button>
         </div>
-        <input type="text" className="textInput" placeholder="Search here..." />
+        <div className="inputContainer">
+          <input
+            type="text"
+            className="textInput"
+            placeholder="Search Something..."
+          />
+        </div>
+
         {renderMoreDropdownItems(navItems)}
       </div>
       {renderPopover()}
