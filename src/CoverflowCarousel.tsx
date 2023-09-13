@@ -6,7 +6,7 @@ const PaginationDots = ({
   currentIndex,
   handleDotClick,
 }: {
-  numDots: number;
+   numDots: number;
   currentIndex: number;
   handleDotClick: (dotIndex: number) => void;
 }) => {
