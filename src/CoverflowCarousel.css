@@ -64,11 +64,11 @@
   width: 10px;
   height: 10px;
   border-radius: 10px;
-  background-color: #D3D2D2;
+  background-color: #d3d2d2;
   cursor: pointer;
 }
 
 .dot.active {
   width: 32px;
-  background-color: #60BCEA; /* Change the active dot color as desired */
+  background-color: #60bcea; /* Change the active dot color as desired */
 }

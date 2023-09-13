@@ -1,7 +1,15 @@
 import { useState } from "react";
 import "./CoverflowCarousel.css"; // Import your CSS or SCSS styles
 
-const PaginationDots = ({ numDots, currentIndex, handleDotClick }) => {
+const PaginationDots = ({
+  numDots,
+  currentIndex,
+  handleDotClick,
+}: {
+  numDots: number;
+  currentIndex: number;
+  handleDotClick: (dotIndex: number) => void;
+}) => {
   const dots = Array.from({ length: numDots }, (_, i) => i);
 
   return (
@@ -64,7 +72,8 @@ const CoverflowCarousel = () => {
             const distanceFromActive = Math.abs(index - activeIndex);
             const scale = 1 - 0.2 * distanceFromActive;
             const zIndex = activeIndex - distanceFromActive + 1;
-            const imgCurrIndex = (currentIndex + (index - activeIndex)) % numImages
+            const imgCurrIndex =
+              (currentIndex + (index - activeIndex)) % numImages;
 
             return (
               <div
@@ -80,7 +89,7 @@ const CoverflowCarousel = () => {
                 }}
                 onClick={() =>
                   setCurrentIndex(
-                      imgCurrIndex > 0 ? imgCurrIndex : numImages + imgCurrIndex
+                    imgCurrIndex > 0 ? imgCurrIndex : numImages + imgCurrIndex
                   )
                 }
               >
@@ -91,7 +100,7 @@ const CoverflowCarousel = () => {
         </div>
         <div className="navigation">
           <button onClick={handlePrev} className="prev-button">
-            <img src="/arrow-left.svg"/>
+            <img src="/arrow-left.svg" />
           </button>
           <PaginationDots
             numDots={numImages}
@@ -99,7 +108,7 @@ const CoverflowCarousel = () => {
             handleDotClick={handleDotClick}
           />
           <button onClick={handleNext} className="next-button">
-            <img src="/arrow-right.svg"/>
+            <img src="/arrow-right.svg" />
           </button>
         </div>
       </div>
